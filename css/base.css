@@ -10,6 +10,10 @@ h2 > a:focus {
   text-decoration: none;
 }
 
+blockquote {
+  border: none;
+}
+
 .media {
   width: 50%;
   min-width: 300px;
