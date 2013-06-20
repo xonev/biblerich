@@ -37,6 +37,7 @@ Flashcards.NavigationView = class NavigationView extends Backbone.View
   events:
     'click .prev': 'previous'
     'click .next': 'next'
+    'click .flip': 'flip'
 
   initialize: ({@cardData}) ->
 
@@ -45,6 +46,9 @@ Flashcards.NavigationView = class NavigationView extends Backbone.View
 
   next: ->
     @trigger('next')
+
+  flip: ->
+    @view?.toggle()
 
   show: (index) ->
     @view?.remove()
@@ -58,8 +62,27 @@ Flashcards.NavigationView = class NavigationView extends Backbone.View
 Flashcards.CardView = class CardView extends Backbone.View
   className: 'card'
 
+  events:
+    'click': 'toggle'
+
   initialize: ({@img, @text}) ->
-    @$el.append("<img src='/img/flashcards/#{@img}'></img>#{@text}")
+    @imgElement = $("<img src='/img/flashcards/#{@img}' alt='click to see answer'></img>")
+    @$el.append(@imgElement)
+    @showingImage = true
+
+  toggle: =>
+    if @showingImage
+      element = @textElement ||= $("<p>#{@text}</p>")
+      direction = 'rl'
+    else
+      element = @imgElement
+      direction = 'lr'
+
+    @$el.flip
+      direction: direction
+      content: element[0] # flip acts funny when passed a jQuery element list
+
+    @showingImage = !@showingImage
 
   render: ->
     @el

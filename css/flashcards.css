@@ -1,0 +1,16 @@
+#flashcards {
+
+}
+
+#flashcards .card {
+  background-color: white;
+  font-size: 2em;
+  height: 400px;
+  width: 300px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#flashcards .card img, #flashcards .card p {
+}

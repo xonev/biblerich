@@ -2,7 +2,8 @@
 (function() {
   var CardView, Flashcards, NavigationView, Router, _ref, _ref1, _ref2,
     __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   window.Flashcards = Flashcards = {
     init: function(pageUrl, cardData) {
@@ -90,7 +91,8 @@
 
     NavigationView.prototype.events = {
       'click .prev': 'previous',
-      'click .next': 'next'
+      'click .next': 'next',
+      'click .flip': 'flip'
     };
 
     NavigationView.prototype.initialize = function(_arg) {
@@ -103,6 +105,12 @@
 
     NavigationView.prototype.next = function() {
       return this.trigger('next');
+    };
+
+    NavigationView.prototype.flip = function() {
+      var _ref2;
+
+      return (_ref2 = this.view) != null ? _ref2.toggle() : void 0;
     };
 
     NavigationView.prototype.show = function(index) {
@@ -127,15 +135,38 @@
     __extends(CardView, _super);
 
     function CardView() {
-      _ref2 = CardView.__super__.constructor.apply(this, arguments);
+      this.toggle = __bind(this.toggle, this);      _ref2 = CardView.__super__.constructor.apply(this, arguments);
       return _ref2;
     }
 
     CardView.prototype.className = 'card';
 
+    CardView.prototype.events = {
+      'click': 'toggle'
+    };
+
     CardView.prototype.initialize = function(_arg) {
       this.img = _arg.img, this.text = _arg.text;
-      return this.$el.append("<img src='/img/flashcards/" + this.img + "'></img>" + this.text);
+      this.imgElement = $("<img src='/img/flashcards/" + this.img + "' alt='click to see answer'></img>");
+      this.$el.append(this.imgElement);
+      return this.showingImage = true;
+    };
+
+    CardView.prototype.toggle = function() {
+      var direction, element;
+
+      if (this.showingImage) {
+        element = this.textElement || (this.textElement = $("<p>" + this.text + "</p>"));
+        direction = 'rl';
+      } else {
+        element = this.imgElement;
+        direction = 'lr';
+      }
+      this.$el.flip({
+        direction: direction,
+        content: element[0]
+      });
+      return this.showingImage = !this.showingImage;
     };
 
     CardView.prototype.render = function() {
