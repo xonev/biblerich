@@ -1,0 +1,24 @@
+#flashcards-wrapper {
+  width: 100%;
+}
+
+#flashcards {
+  width: 300px;
+  margin: 0 auto;
+}
+
+#flashcards .controls {
+  width: 50%;
+  margin: 0 auto;
+}
+
+#flashcards .card {
+  background-color: white;
+  font-size: 2em;
+  height: 400px;
+  width: 300px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  line-height: 2em;
+}
