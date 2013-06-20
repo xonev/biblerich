@@ -9,6 +9,7 @@
     <link href="css/home.css" rel="stylesheet">
     <link href="css/flashcards.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
     <script type="text/javascript" src="js/jquery.flip.min.js"></script>
     <script type="text/javascript" src="js/json2.js"></script>
@@ -16,6 +17,57 @@
     <script type="text/javascript" src="js/backbone-1.0.0.min.js"></script>
   </head>
   <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+
+          <!-- Be sure to leave the brand out there if you want it shown -->
+          <a class="brand" href="/">BibleRICH</a>
+
+          <!-- Everything you want hidden at 940px or less, place within here -->
+          <div class="nav-collapse collapse">
+            <!-- .nav, .navbar-search, .navbar-form, etc -->
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Pictures
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">What does the Bible say about...</a></li>
+                  <li><a href="#">Book highlights and why</a></li>
+                  <li><a href="/bible-books.html">Bible books</a></li>
+                  <li><a href="#">Prophecies of Jesus</a></li>
+                  <li><a href="#">Doctrines</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Review
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">What does the Bible say about...</a></li>
+                  <li><a href="#">Book highlights and why</a></li>
+                  <li><a href="bible-books-review.html">Bible books</a></li>
+                  <li><a href="#">Prophecies of Jesus</a></li>
+                  <li><a href="#">Doctrines</a></li>
+                </ul>
+              </li>
+              <li><a href='/about-us.html'>About Us</a></li>
+              <li><a href='/testimonies.html'>Testimonies</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class='span9 offset2'>
       {{ content }}
     </div>
