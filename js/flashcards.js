@@ -164,7 +164,9 @@
       }
       this.$el.flip({
         direction: direction,
-        content: element[0]
+        speed: 200,
+        content: element[0],
+        color: 'white'
       });
       return this.showingImage = !this.showingImage;
     };
@@ -174,7 +176,7 @@
     };
 
     CardView.prototype.remove = function() {
-      return this.$el.remove();
+      return this.$el.detach();
     };
 
     return CardView;

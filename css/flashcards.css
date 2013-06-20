@@ -1,5 +1,15 @@
-#flashcards {
+#flashcards-wrapper {
+  width: 100%;
+}
 
+#flashcards {
+  width: 300px;
+  margin: 0 auto;
+}
+
+#flashcards .controls {
+  width: 50%;
+  margin: 0 auto;
 }
 
 #flashcards .card {
@@ -10,7 +20,5 @@
   text-align: center;
   display: table-cell;
   vertical-align: middle;
-}
-
-#flashcards .card img, #flashcards .card p {
+  line-height: 2em;
 }

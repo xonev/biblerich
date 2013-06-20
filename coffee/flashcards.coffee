@@ -80,7 +80,9 @@ Flashcards.CardView = class CardView extends Backbone.View
 
     @$el.flip
       direction: direction
+      speed: 200
       content: element[0] # flip acts funny when passed a jQuery element list
+      color: 'white'
 
     @showingImage = !@showingImage
 
@@ -88,5 +90,5 @@ Flashcards.CardView = class CardView extends Backbone.View
     @el
 
   remove: ->
-    @$el.remove()
+    @$el.detach()
 
