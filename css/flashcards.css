@@ -8,8 +8,12 @@
 }
 
 #flashcards .controls {
-  width: 50%;
-  margin: 0 auto;
+  width: 100%;
+}
+
+#flashcards .controls button {
+  width: 72px;
+  margin: 0;
 }
 
 #flashcards .card {

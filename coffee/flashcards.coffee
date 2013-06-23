@@ -11,19 +11,21 @@ Flashcards.Router = class Router extends Backbone.Router
 
   initialize: ({cardData}) ->
     @numCards = cardData.length
+    @ids = [1..@numCards]
     @navigationView = new NavigationView(cardData: cardData, el: document.getElementById('flashcards'))
     @navigationView.on 'previous', => @changeRoute(-1)
     @navigationView.on 'next', => @changeRoute(1)
+    @navigationView.on 'shuffle', => @ids = _.shuffle(@ids)
 
   showCard: (id) ->
-    @index = id - 1
-    @navigationView.show(@index)
+    @index = _.indexOf(@ids, parseInt(id))
+    @navigationView.show(@ids[@index] - 1)
 
   changeRoute: (amount) ->
     newIndex = @index + amount
     newIndex = if newIndex >= 0 then newIndex else newIndex % @numCards + @numCards
     @index = newIndex % @numCards
-    @navigate("card/#{@index + 1}", trigger: true)
+    @navigate("card/#{@ids[@index]}", trigger: true)
 
   start: ->
     @firstCard()
@@ -38,6 +40,7 @@ Flashcards.NavigationView = class NavigationView extends Backbone.View
     'click .prev': 'previous'
     'click .next': 'next'
     'click .flip': 'flip'
+    'click .shuffle': 'shuffle'
 
   initialize: ({@cardData}) ->
 
@@ -49,6 +52,9 @@ Flashcards.NavigationView = class NavigationView extends Backbone.View
 
   flip: ->
     @view?.toggle()
+
+  shuffle: ->
+    @trigger('shuffle')
 
   show: (index) ->
     @view?.remove()
