@@ -17,7 +17,8 @@
       'change .books': 'updateChapters'
     };
 
-    BookSelector.prototype.initialize = function() {
+    BookSelector.prototype.initialize = function(_arg) {
+      this.firstOption = _arg.firstOption;
       return this.updateChapters();
     };
 
@@ -54,6 +55,9 @@
         return _results;
       }).call(this);
       chapters = options.join('');
+      if (this.firstOption) {
+        chapters = "        <optgroup label='Book'><option value='0'>" + this.firstOption + "</option></optgroup>        <optgroup label='Chapters'>" + chapters + "</optgroup>";
+      }
       return this.$el.find('.chapters').append(chapters);
     };
 
