@@ -32,11 +32,16 @@
     };
 
     Router.prototype.initialize = function(_arg) {
-      var cardData,
+      var cardData, _i, _ref1, _results,
         _this = this;
 
       cardData = _arg.cardData;
       this.numCards = cardData.length;
+      this.ids = (function() {
+        _results = [];
+        for (var _i = 1, _ref1 = this.numCards; 1 <= _ref1 ? _i <= _ref1 : _i >= _ref1; 1 <= _ref1 ? _i++ : _i--){ _results.push(_i); }
+        return _results;
+      }).apply(this);
       this.navigationView = new NavigationView({
         cardData: cardData,
         el: document.getElementById('flashcards')
@@ -44,14 +49,17 @@
       this.navigationView.on('previous', function() {
         return _this.changeRoute(-1);
       });
-      return this.navigationView.on('next', function() {
+      this.navigationView.on('next', function() {
         return _this.changeRoute(1);
+      });
+      return this.navigationView.on('shuffle', function() {
+        return _this.ids = _.shuffle(_this.ids);
       });
     };
 
     Router.prototype.showCard = function(id) {
-      this.index = id - 1;
-      return this.navigationView.show(this.index);
+      this.index = _.indexOf(this.ids, parseInt(id));
+      return this.navigationView.show(this.ids[this.index] - 1);
     };
 
     Router.prototype.changeRoute = function(amount) {
@@ -60,7 +68,7 @@
       newIndex = this.index + amount;
       newIndex = newIndex >= 0 ? newIndex : newIndex % this.numCards + this.numCards;
       this.index = newIndex % this.numCards;
-      return this.navigate("card/" + (this.index + 1), {
+      return this.navigate("card/" + this.ids[this.index], {
         trigger: true
       });
     };
@@ -92,7 +100,8 @@
     NavigationView.prototype.events = {
       'click .prev': 'previous',
       'click .next': 'next',
-      'click .flip': 'flip'
+      'click .flip': 'flip',
+      'click .shuffle': 'shuffle'
     };
 
     NavigationView.prototype.initialize = function(_arg) {
@@ -111,6 +120,10 @@
       var _ref2;
 
       return (_ref2 = this.view) != null ? _ref2.toggle() : void 0;
+    };
+
+    NavigationView.prototype.shuffle = function() {
+      return this.trigger('shuffle');
     };
 
     NavigationView.prototype.show = function(index) {
