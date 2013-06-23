@@ -147,18 +147,19 @@
 
     CardView.prototype.initialize = function(_arg) {
       this.img = _arg.img, this.text = _arg.text;
-      this.imgElement = $("<img src='/img/flashcards/" + this.img + "' alt='click to see answer'></img>");
-      this.$el.append(this.imgElement);
-      return this.showingImage = true;
+      this.textElement = $("<p>" + this.text + "</p>");
+      this.$el.append(this.textElement);
+      return this.showingImage = false;
     };
 
     CardView.prototype.toggle = function() {
       var direction, element;
 
       if (this.showingImage) {
-        element = this.textElement || (this.textElement = $("<p>" + this.text + "</p>"));
+        element = this.textElement;
         direction = 'rl';
       } else {
+        this.imgElement = $("<img src='/img/flashcards/" + this.img + "' alt='click to see answer'></img>");
         element = this.imgElement;
         direction = 'lr';
       }

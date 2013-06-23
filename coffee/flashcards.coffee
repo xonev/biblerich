@@ -66,15 +66,16 @@ Flashcards.CardView = class CardView extends Backbone.View
     'click': 'toggle'
 
   initialize: ({@img, @text}) ->
-    @imgElement = $("<img src='/img/flashcards/#{@img}' alt='click to see answer'></img>")
-    @$el.append(@imgElement)
-    @showingImage = true
+    @textElement = $("<p>#{@text}</p>")
+    @$el.append(@textElement)
+    @showingImage = false
 
   toggle: =>
     if @showingImage
-      element = @textElement ||= $("<p>#{@text}</p>")
+      element = @textElement
       direction = 'rl'
     else
+      @imgElement = $("<img src='/img/flashcards/#{@img}' alt='click to see answer'></img>")
       element = @imgElement
       direction = 'lr'
 

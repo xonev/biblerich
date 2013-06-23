@@ -3,7 +3,7 @@ window.BookSelector = class BookSelector extends Backbone.View
     'click button': 'go'
     'change .books': 'updateChapters'
 
-  initialize: ->
+  initialize: ({@firstOption}) ->
     @updateChapters()
 
   slugify: (str) ->
@@ -24,6 +24,11 @@ window.BookSelector = class BookSelector extends Backbone.View
     @$el.find('.chapters').empty()
     options = ("<option>#{num}</option>" for num in [1..CHAPTER_COUNTS[@book()]])
     chapters = options.join('')
+    # Sometimes we'll want an arbitrary "first option"
+    if @firstOption
+      chapters = "
+        <optgroup label='Book'><option value='0'>#{@firstOption}</option></optgroup>
+        <optgroup label='Chapters'>#{chapters}</optgroup>"
     @$el.find('.chapters').append(chapters)
 
 CHAPTER_COUNTS =

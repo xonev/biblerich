@@ -35,3 +35,15 @@ body {
   background-repeat: repeat;
   background-attachment: fixed;
 }
+
+.brand img {
+  height: 40px;
+}
+
+.logo-nav > li {
+  line-height: 40px;
+}
+
+.navbar .nav.logo-nav .dropdown-toggle .caret {
+  margin-top: 16px;
+}
