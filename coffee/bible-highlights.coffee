@@ -4,7 +4,7 @@ $ ->
     firstOption: "Book highlight"
   selector.on 'go', ({book, chapter}) ->
     if chapter == '0'
-      path = "#{book}.html"
+      path = "/bible-highlights/#{book}/"
     else
-      path = "#{book} #{chapter}.html"
+      path = "/bible-highlights/#{book}/#{chapter}.html"
     window.location.pathname = selector.slugify(path)
