@@ -136,6 +136,7 @@ class FileWriter
   def process_title(title)
     title = title.strip
     log("Processing title: #{title}")
+    output_footer
     @file.close if @file
     @file = open_file(title)
     @file.write(yml_front(title))
@@ -159,6 +160,7 @@ class FileWriter
     when States::SubTitle
       if /^-/.match content
         output_title(@title)
+        output_header
         output_media
         output_content(content[1, content.length-1])
         @state = States::Content
@@ -180,6 +182,14 @@ class FileWriter
   def output_media
     log("Outputting media")
     output("{% include media.html %}")
+  end
+
+  def output_header
+    output("{% include picture-page-header.html %}")
+  end
+
+  def output_footer
+    output("{% include picture-page-footer.html %}")
   end
 
   def output_content(content)
