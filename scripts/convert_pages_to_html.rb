@@ -3,6 +3,8 @@ require 'zlib'
 require 'stringio'
 require 'nokogiri'
 require 'optparse'
+require 'active_support/core_ext/string'
+require 'htmlentities'
 
 options = {}
 OptionParser.new do |opts|
@@ -85,48 +87,118 @@ Books = [
 
 Book_name_matcher = Regexp.new("^(#{Books.join("|")})$", true)
 
+def log(message)
+  puts message
+end
+
+def slugify(str)
+  str.strip.downcase.gsub(/ /, '-')
+end
+
 def yml_front(title)
   """---
 layout: default
 title: Bible Rich | #{title}
----"""
+image_path: /img/bible-highlights/books/#{slugify(title)}.png
+image_alt: #{title}
+audio_mp3_path: /audio/bible-highlights/#{slugify(title)}/book-simple.mp3
+audio_wav_path: /audio/bible-highlights/#{slugify(title)}/book-simple.wav
+---\n"""
 end
 
 def xml_to_html(xml, processor)
   doc = Nokogiri::XML.parse(xml)
   doc.search('//sf:span/text()').each do |p|
-    element = if Book_name_matcher.match(p.content.strip)
-                processor.process_title(p.content)
-                'h1'
-              else
-                'p'
-              end
-    processor.process_content "\n<#{element}>#{p.content}</#{element}>"
+    if Book_name_matcher.match(p.content.strip)
+      processor.process_title(p.content)
+    else
+      processor.process_content(p.content)
+    end
   end
   processor.finish
 end
 
 class FileWriter
+  module States
+    Start = 0
+    MidTitle = 1
+    SubTitle = 2
+    Content = 3
+  end
+
   def initialize
     @file = nil
+    @state = States::Start
+    @coder = HTMLEntities.new
+    log("In state: Start")
   end
 
   def process_title(title)
+    title = title.strip
+    log("Processing title: #{title}")
     @file.close if @file
     @file = open_file(title)
     @file.write(yml_front(title))
+    @book = title
+    @title = title
+    @state = States::MidTitle
+    log("In state: MidTitle")
   end
 
   def process_content(content)
-    @file.write(content) if @file
+    content = content.strip
+    log("Processing content: #{content}")
+    case @state
+    when States::MidTitle
+      @title = "#{@title} #{content}"
+      log("Added to title: #{@title}")
+      if content == '-'
+        @state = States::SubTitle
+        log("In state: SubTitle")
+      end
+    when States::SubTitle
+      if /^-/.match content
+        output_title(@title)
+        output_media
+        output_content(content[1, content.length-1])
+        @state = States::Content
+        log("In state: Content")
+      else
+        @title = "#{@title} #{content.titleize}"
+        log("Added to title: #{@title}")
+      end
+    when States::Content
+      output_content(content)
+    end
+  end
+
+  def output_title(title)
+    log("Outputting title: #{title}")
+    output("<h1>#{@coder.encode(title)}</h1>\n")
+  end
+
+  def output_media
+    log("Outputting media")
+    output("{% include media.html %}")
+  end
+
+  def output_content(content)
+    log("Outputting content: #{content}")
+    output("<p>#{@coder.encode(content)}</p>")
+  end
+
+  def output(text)
+    @file.write("#{text}\n") if @file
   end
 
   def finish
+    log("Finished")
     @file.close if @file
   end
 
   def open_file(title)
-    filename = File.join('bible-highlights', title.strip.downcase.gsub(/ /, '-'), 'index.html')
+    filename = File.join('bible-highlights', slugify(title), 'index.html')
+    log("Opening file: #{filename}")
     File.open(filename, 'w')
   end
 
