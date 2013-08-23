@@ -18,11 +18,11 @@ end
 
 pn = Pathname.pwd + ARGV[0]
 Books = [
-  "Genesis",
-  "Exodus",
-  "Leviticus",
-  "Numbers",
-  "Deuteronomy",
+  #"Genesis",
+  #"Exodus",
+  #"Leviticus",
+  #"Numbers",
+  #"Deuteronomy",
   "Joshua",
   "Judges",
   "Ruth",
@@ -107,10 +107,12 @@ audio_wav_path: /audio/bible-highlights/#{slugify(title)}/book-simple.wav
 end
 
 def xml_to_html(xml, processor)
+  @matched ||= []
   doc = Nokogiri::XML.parse(xml)
   doc.search('//sf:span/text()').each do |p|
-    if Book_name_matcher.match(p.content.strip)
+    if Book_name_matcher.match(p.content.strip) && !Regexp.new("^(#{@matched.join("|")})$", true).match(p.content.strip)
       processor.process_title(p.content)
+      @matched.push(p.content.strip)
     else
       processor.process_content(p.content)
     end
