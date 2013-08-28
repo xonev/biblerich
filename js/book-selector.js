@@ -18,8 +18,43 @@
     };
 
     BookSelector.prototype.initialize = function(_arg) {
-      this.firstOption = _arg.firstOption;
-      return this.updateChapters();
+      var $optgroup, book, options;
+      this.firstOption = _arg.firstOption, this.oldTestament = _arg.oldTestament, this.newTestament = _arg.newTestament;
+      this.updateChapters();
+      if (this.oldTestament) {
+        $optgroup = this.$el.find('.books optgroup[label="Old Testament"]');
+        $optgroup.find('option').remove();
+        options = [
+          (function() {
+            var _i, _len, _ref1, _results;
+            _ref1 = this.oldTestament;
+            _results = [];
+            for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+              book = _ref1[_i];
+              _results.push("<option>" + book + "</option>");
+            }
+            return _results;
+          }).call(this)
+        ];
+        $optgroup.append(options.join(''));
+      }
+      if (this.newTestament) {
+        $optgroup = this.$el.find('.books optgroup[label="New Testament"]');
+        $optgroup.find('option').remove();
+        options = [
+          (function() {
+            var _i, _len, _ref1, _results;
+            _ref1 = this.newTestament;
+            _results = [];
+            for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+              book = _ref1[_i];
+              _results.push("<option>" + book + "</option>");
+            }
+            return _results;
+          }).call(this)
+        ];
+        return $optgroup.append(options.join(''));
+      }
     };
 
     BookSelector.prototype.slugify = function(str) {
@@ -42,16 +77,18 @@
     };
 
     BookSelector.prototype.updateChapters = function() {
-      var chapters, num, options;
+      var chapters, options;
       this.$el.find('.chapters').empty();
-      options = (function() {
-        var _i, _ref1, _results;
-        _results = [];
-        for (num = _i = 1, _ref1 = CHAPTER_COUNTS[this.book()]; 1 <= _ref1 ? _i <= _ref1 : _i >= _ref1; num = 1 <= _ref1 ? ++_i : --_i) {
-          _results.push("<option>" + num + "</option>");
-        }
-        return _results;
-      }).call(this);
+      switch (this.book()) {
+        case 'Genesis':
+          options = ["<option>1</option>"];
+          break;
+        case 'Exodus':
+          options = ["<option>20</option>"];
+          break;
+        default:
+          options = [];
+      }
       chapters = options.join('');
       if (this.firstOption) {
         chapters = "        <optgroup label='Book'><option value='0'>" + this.firstOption + "</option></optgroup>        <optgroup label='Chapters'>" + chapters + "</optgroup>";
