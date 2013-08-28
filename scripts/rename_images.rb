@@ -5,9 +5,9 @@ dirs.each do |dirname|
     # get all of the files in the directory
     files = Dir.entries(dirname)
     files.each do |filename|
-      unless /^[.]/.match filename
+      if /_MORE/.match filename
         old_name = File.join(dirname, filename)
-        new_name = File.join(dirname, "book-simple#{File.extname(filename)}")
+        new_name = File.join(dirname, "book-detailed#{File.extname(filename)}")
         puts "#{old_name} -> #{new_name}"
         File.rename(old_name, new_name)
       end
