@@ -3,8 +3,18 @@ window.BookSelector = class BookSelector extends Backbone.View
     'click button': 'go'
     'change .books': 'updateChapters'
 
-  initialize: ({@firstOption}) ->
+  initialize: ({@firstOption, @oldTestament, @newTestament}) ->
     @updateChapters()
+    if @oldTestament
+      $optgroup = @$el.find('.books optgroup[label="Old Testament"]')
+      $optgroup.find('option').remove()
+      options = ["<option>#{book}</option>" for book in @oldTestament]
+      $optgroup.append(options.join(''))
+    if @newTestament
+      $optgroup = @$el.find('.books optgroup[label="New Testament"]')
+      $optgroup.find('option').remove()
+      options = ["<option>#{book}</option>" for book in @newTestament]
+      $optgroup.append(options.join(''))
 
   slugify: (str) ->
     str.toLowerCase().replace(/[ ]/g, '-')
@@ -22,7 +32,13 @@ window.BookSelector = class BookSelector extends Backbone.View
 
   updateChapters: ->
     @$el.find('.chapters').empty()
-    options = ("<option>#{num}</option>" for num in [1..CHAPTER_COUNTS[@book()]])
+    # Eventually (and theoretically) we'll have something for all of the chapters.
+    # Until that day, we'll add them as they're available.
+    # options = ("<option>#{num}</option>" for num in [1..CHAPTER_COUNTS[@book()]])
+    switch @book()
+      when 'Genesis' then options = ["<option>1</option>"]
+      when 'Exodus' then options = ["<option>20</option>"]
+      else options = []
     chapters = options.join('')
     # Sometimes we'll want an arbitrary "first option"
     if @firstOption
@@ -98,5 +114,4 @@ CHAPTER_COUNTS =
   "3 John": 1
   "Jude": 1
   "Revelation": 22
-
 

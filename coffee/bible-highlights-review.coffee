@@ -1,10 +1,11 @@
 $ ->
   selector = new BookSelector
     el: $('.book-selector')[0]
-    firstOption: "Book highlight"
+    oldTestament: ['Genesis', 'Exodus']
+    newTestament: []
   selector.on 'go', ({book, chapter}) ->
     if chapter == '0'
       path = "#{book} flashcards.html"
     else
-      path = "#{book} #{chapter} flashcards.html"
+      path = "/bible-highlights/review/#{book}/chapter #{chapter}.html"
     window.location.pathname = selector.slugify(path)
