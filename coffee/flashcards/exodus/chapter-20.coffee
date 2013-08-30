@@ -1,6 +1,6 @@
 $ ->
   Flashcards.init '/bible-highlights/review/exodus/chapter-20.html', [
-    { img: 'commandments/1.png', text: 'No other gods' }
+    { img: 'commandments/1.png', text: 'I am the Lord, no other gods' }
     { img: 'commandments/2.png', text: 'Not make image and bow down to it' }
     { img: 'commandments/3.png', text: 'Not take God\'s name in vain' }
     { img: 'commandments/4.png', text: 'Sabbath day keep holy' }
