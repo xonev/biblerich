@@ -1,6 +1,10 @@
 window.Flashcards = Flashcards =
-  init: (pageUrl, cardData) ->
-    router = new Flashcards.Router(cardData: cardData)
+  init: (pageUrl, options = {}, cardData = null) ->
+    if _.isArray options
+      cardData = options
+      options = {}
+
+    router = new Flashcards.Router(cardData: cardData, cardOptions: options)
     Backbone.history.start
       root: pageUrl
     router.start()
@@ -9,10 +13,13 @@ Flashcards.Router = class Router extends Backbone.Router
   routes:
     "card/:id": "showCard"
 
-  initialize: ({cardData}) ->
+  initialize: ({cardData, cardOptions}) ->
     @numCards = cardData.length
     @ids = [1..@numCards]
-    @navigationView = new NavigationView(cardData: cardData, el: document.getElementById('flashcards'))
+    @navigationView = new NavigationView
+      cardData: cardData
+      imageFirst: !!cardOptions.imageFirst
+      el: document.getElementById('flashcards')
     @navigationView.on 'previous', => @changeRoute(-1)
     @navigationView.on 'next', => @changeRoute(1)
     @navigationView.on 'shuffle', => @ids = _.shuffle(@ids)
@@ -42,7 +49,7 @@ Flashcards.NavigationView = class NavigationView extends Backbone.View
     'click .flip': 'flip'
     'click .shuffle': 'shuffle'
 
-  initialize: ({@cardData}) ->
+  initialize: ({@cardData, @imageFirst}) ->
 
   previous: ->
     @trigger('previous')
@@ -61,7 +68,7 @@ Flashcards.NavigationView = class NavigationView extends Backbone.View
     if @cardViews[index]
       @view = @cardViews[index]
     else if @cardData.length > index
-      @view = @cardViews[index] = new CardView @cardData[index]
+      @view = @cardViews[index] = new CardView @cardData[index], @imageFirst
     @$el.prepend(@view.render())
 
 
@@ -71,24 +78,29 @@ Flashcards.CardView = class CardView extends Backbone.View
   events:
     'click': 'toggle'
 
-  initialize: ({@img, @text}) ->
+  initialize: ({@img, @text}, @imageFirst = false) ->
     @textElement = $("<p>#{@text}</p>")
-    @$el.append(@textElement)
-    @showingImage = false
+    @imgElement = $("<img src='/img/flashcards/#{@img}' alt='click to see answer'></img>")
+    @showingImage = @imageFirst
+    @$el.append @getNotShown(!@showingImage)
+
+  getNotShown: (showingImage) ->
+    if showingImage
+      @textElement
+    else
+      @imgElement
+
+  getDirection: (showingImage) ->
+    if showingImage
+      'rl'
+    else
+      'lr'
 
   toggle: =>
-    if @showingImage
-      element = @textElement
-      direction = 'rl'
-    else
-      @imgElement = $("<img src='/img/flashcards/#{@img}' alt='click to see answer'></img>")
-      element = @imgElement
-      direction = 'lr'
-
     @$el.flip
-      direction: direction
+      direction: @getDirection(@showingImage)
       speed: 200
-      content: element[0] # flip acts funny when passed a jQuery element list
+      content: @getNotShown(@showingImage)[0] # flip acts funny when passed a jQuery element list
       color: 'white'
 
     @showingImage = !@showingImage

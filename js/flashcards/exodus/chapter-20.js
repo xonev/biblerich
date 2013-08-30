@@ -4,7 +4,7 @@
     return Flashcards.init('/bible-highlights/review/exodus/chapter-20.html', [
       {
         img: 'commandments/1.png',
-        text: 'No other gods'
+        text: 'I am the Lord, no other gods'
       }, {
         img: 'commandments/2.png',
         text: 'Not make image and bow down to it'
