@@ -47,6 +47,12 @@
         img: 'books/2-thessalonians.png',
         text: '2 Thessalonians'
       }, {
+        img: 'books/1-timothy.png',
+        text: '1 Timothy'
+      }, {
+        img: 'books/2-timothy.png',
+        text: '2 Timothy'
+      }, {
         img: 'books/titus.png',
         text: 'Titus'
       }, {
