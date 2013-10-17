@@ -16,6 +16,8 @@ $ ->
       { img: 'books/colossians.png', text: 'Colossians' }
       { img: 'books/1-thessalonians.png', text: '1 Thessalonians' }
       { img: 'books/2-thessalonians.png', text: '2 Thessalonians' }
+      { img: 'books/1-timothy.png', text: '1 Timothy' }
+      { img: 'books/2-timothy.png', text: '2 Timothy' }
       { img: 'books/titus.png', text: 'Titus' }
       { img: 'books/philemon.png', text: 'Philemon' }
       { img: 'books/hebrews.png', text: 'Hebrews' }
