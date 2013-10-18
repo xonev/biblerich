@@ -52,6 +52,7 @@
     };
 
     TutorialView.prototype.close = function() {
+      this.trigger('dismiss-tutorial');
       return this.$modal.modal('hide');
     };
 

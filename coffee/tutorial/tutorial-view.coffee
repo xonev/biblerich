@@ -44,6 +44,7 @@ Tutorial.TutorialView = class TutorialView extends Backbone.View
     @currView.cleanup()
 
   close: ->
+    @trigger 'dismiss-tutorial'
     @$modal.modal 'hide'
 
   next: ->

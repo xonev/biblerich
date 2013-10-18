@@ -97,8 +97,8 @@ viewsForQuizYourself = ->
     memory with flashcards.")
   views.push exampleView(
     "You can navigate through the cards with the arrow buttons.",
-    highlightFunc('.prev, .next'),
-    removeHighlightFunc('.prev, .next'))
+    highlightFunc('#flashcards .prev, #flashcards .next'),
+    removeHighlightFunc('#flashcards .prev, #flashcards .next'))
   removeHighlight_clickFlip = ->
     removeHighlight '.flip'
     click '.flip'
@@ -111,8 +111,22 @@ viewsForQuizYourself = ->
     highlightFunc('.shuffle'),
     removeHighlightFunc('.shuffle'))
   views.push exampleView("Now you know the basics! Learn the Days of Creation,
-    or, if you'd really like to, feel free to explore the rest of the site!")
+    or, if you'd really like to, feel free to explore the rest of the site!",
+    completedTutorial)
   views
+
+shouldSeeTutorial = ->
+  !Cookies.get 'seen-tutorial'
+
+completedTutorial = ->
+  Cookies.set 'seen-tutorial', true
+
+startTutorial = ->
+  Cookies.expire 'seen-tutorial'
+  if window.location.pathname == '/'
+    window.location.reload()
+  else
+    window.location.pathname = '/'
 
 exampleViews = (page) ->
   switch page
@@ -125,6 +139,13 @@ exampleViews = (page) ->
 
 window.Tutorial =
   initPage: (page) ->
-    tutorialView = new Tutorial.TutorialView
-      exampleViews: exampleViews(page)
-    tutorialView.render()
+    if shouldSeeTutorial()
+      tutorialView = new Tutorial.TutorialView
+        exampleViews: exampleViews(page)
+      tutorialView.on 'dismiss-tutorial', ->
+        completedTutorial()
+
+      tutorialView.render()
+
+$('#tutorial').click startTutorial
+
