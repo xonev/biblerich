@@ -1,6 +1,6 @@
 COFFEEC = coffee
 
-APPSRC := $(wildcard coffee/*.coffee) $(wildcard coffee/*/*/*.coffee)
+APPSRC := $(wildcard coffee/*.coffee) $(wildcard coffee/*/*/*.coffee) $(wildcard coffee/*/*.coffee)
 APPOBJ := ${APPSRC:coffee/%.coffee=js/%.js}
 
 .PHONY: build

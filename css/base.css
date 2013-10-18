@@ -14,17 +14,17 @@ blockquote {
   border: none;
 }
 
-.media {
+.audio-visual {
   width: 50%;
   min-width: 300px;
   margin-right: 3em;
 }
 
-.media img {
+.audio-visual img {
   width: 100%;
 }
 
-.media audio {
+.audio-visual audio {
   margin: 1em;
 }
 
