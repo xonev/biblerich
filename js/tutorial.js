@@ -72,7 +72,7 @@
       return highlight('#days-of-creation-link');
     };
     views.push(exampleView("You should start by learning <strong>The Days of Creation</strong>.", clickLearn_highlightDaysOfCreation, removeHighlightFunc('#days-of-creation-link')));
-    views.push(exampleView("Navigating to <strong>The Days of Creation</strong>", navigateFunc('/bible-highlights/genesis/chapter-1.html')));
+    views.push(exampleView("Navigating to <strong>The Days of Creation</strong>", navigateFunc('/bible-highlights/genesis/chapter-01-days-of-creation.html')));
     return views;
   };
 
@@ -80,7 +80,7 @@
     var clickQuiz_highlightDays, views;
     views = [];
     views.push(exampleView("The <strong>Teach Yourself</strong> section is where you can learn    about what you want to memorize."));
-    views.push(exampleView("The picture should aid your memory.", highlightFunc('#picture'), removeHighlightFunc('#picture')));
+    views.push(exampleView("The picture should aid your memory.", highlightFunc('.audio-visual > a'), removeHighlightFunc('.audio-visual > a')));
     views.push(exampleView("The text explains the memory aids in the picture."));
     views.push(exampleView("If you would like to listen, you can play this recording of the text.", highlightFunc('audio'), removeHighlightFunc('audio')));
     views.push(exampleView("When you're done <strong>Teach</strong>ing <strong>Yourself</strong>\nwhat you want to memorize, you can <strong>Quiz Yourself</strong>.", highlightFunc('#quiz-link'), removeHighlightFunc('#quiz-link')));

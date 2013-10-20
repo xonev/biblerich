@@ -1,6 +1,8 @@
 h1 {
   border-bottom: 1px solid gray;
   margin-bottom: 1em;
+  width: 100%;
+  white-space: nowrap;
 }
 
 h2 > a,
