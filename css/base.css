@@ -15,17 +15,24 @@ blockquote {
 }
 
 .audio-visual {
-  width: 50%;
-  min-width: 300px;
   margin-right: 3em;
+  max-width: 50%;
 }
 
-.audio-visual img {
-  width: 100%;
+.audio-visual img.img-polaroid {
+  max-height: 400px;
+  max-width: 100%;
+  padding: 0;
+  border: none;
+}
+
+.audio-visual a {
+  display: block;
 }
 
 .audio-visual audio {
-  margin: 1em;
+  margin-top: 1em;
+  width: 100%;
 }
 
 body {
