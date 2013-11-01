@@ -53,7 +53,7 @@ viewsForIndex = ->
 
   views.push(exampleView(
     "Navigating to <strong>The Days of Creation</strong>",
-    navigateFunc('/bible-highlights/genesis/chapter-1.html')))
+    navigateFunc('/bible-highlights/genesis/chapter-01-days-of-creation.html')))
   views
 
 viewsForTeachYourself = ->
@@ -63,8 +63,8 @@ viewsForTeachYourself = ->
     about what you want to memorize."))
   views.push exampleView(
     "The picture should aid your memory.",
-    highlightFunc('#picture'),
-    removeHighlightFunc('#picture'))
+    highlightFunc('.audio-visual > a'),
+    removeHighlightFunc('.audio-visual > a'))
   views.push exampleView(
     "The text explains the memory aids in the picture.")
   views.push exampleView(
