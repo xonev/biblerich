@@ -17,100 +17,44 @@ if ARGV.length != 1
 end
 
 pn = Pathname.pwd + ARGV[0]
-Books = [
-  #"Genesis",
-  #"Exodus",
-  #"Leviticus",
-  #"Numbers",
-  #"Deuteronomy",
-  "Joshua",
-  "Judges",
-  "Ruth",
-  "1 Samuel",
-  "2 Samuel",
-  "1 Kings",
-  "2 Kings",
-  "1 Chronicles",
-  "2 Chronicles",
-  "Ezra",
-  "Nehemiah",
-  "Esther",
-  "Job",
-  "Psalms",
-  "Proverbs",
-  "Ecclesiastes",
-  "Song of Solomon",
-  "Isaiah",
-  "Jeremiah",
-  "Lamentations",
-  "Ezekiel",
-  "Daniel",
-  "Hosea",
-  "Joel",
-  "Amos",
-  "Obadiah",
-  "Jonah",
-  "Micah",
-  "Nahum",
-  "Habakkuk",
-  "Zephaniah",
-  "Haggai",
-  "Zechariah",
-  "Malachi",
-  "Matthew",
-  "Mark",
-  "Luke",
-  "John",
-  "Acts",
-  "Romans",
-  "1 Corinthians",
-  "2 Corinthians",
-  "Galatians",
-  "Ephesians",
-  "Philippians",
-  "Colossians",
-  "1 Thessalonians",
-  "2 Thessalonians",
-  "1 Timothy",
-  "2 Timothy",
-  "Titus",
-  "Philemon",
-  "Hebrews",
-  "James",
-  "1 Peter",
-  "2 Peter",
-  "1 John",
-  "2 John",
-  "3 John",
-  "Jude",
-  "Revelation"]
+Sections = [
+  "Genesis Organization",
+  "Genesis 1 - Days"
+]
+(1..50).to_a.each { |num| Sections.push "Genesis #{num}" }
 
-Book_name_matcher = Regexp.new("^(#{Books.join("|")})$", true)
+Matcher = Regexp.new("^(#{Sections.join("|")})$", true)
 
 def log(message)
   puts message
 end
 
 def slugify(str)
-  str.strip.downcase.gsub(/ /, '-')
+  title = str.strip.downcase.gsub(/ /, '-')
+  match = title.match /(\d+)((-+[\w]+)*)/
+  if match
+    # should be something like chapter-02-rest-of-title
+    title = sprintf "%s-%02d%s", "chapter", match[1], match[2]
+  end
+  title
 end
 
-def yml_front(title)
+def yml_front(title, path_root)
   """---
 layout: default
 title: Bible Rich | #{title}
-image_path: /img/bible-highlights/books/#{slugify(title)}.png
+image_path: /img/bible-highlights/#{path_root}/#{slugify(title)}.png
 image_alt: #{title}
-audio_mp3_path: /audio/bible-highlights/#{slugify(title)}/book-simple.mp3
-audio_wav_path: /audio/bible-highlights/#{slugify(title)}/book-simple.wav
+audio_mp3_path: /audio/bible-highlights/#{path_root}/#{slugify(title)}.mp3
+audio_wav_path: /audio/bible-highlights/#{path_root}/#{slugify(title)}.wav
 ---\n"""
 end
 
 def xml_to_html(xml, processor)
   @matched ||= []
   doc = Nokogiri::XML.parse(xml)
-  doc.search('//sf:span/text()').each do |p|
-    if Book_name_matcher.match(p.content.strip) && !Regexp.new("^(#{@matched.join("|")})$", true).match(p.content.strip)
+  doc.search('//sf:p/text() | //sf:span/text()').each do |p|
+    if Matcher.match(p.content.strip) && !Regexp.new("^(#{@matched.join("|")})$", true).match(p.content.strip)
       processor.process_title(p.content)
       @matched.push(p.content.strip)
     else
@@ -128,10 +72,12 @@ class FileWriter
     Content = 3
   end
 
-  def initialize
+  def initialize(has_subtitles = false, path_root)
     @file = nil
     @state = States::Start
     @coder = HTMLEntities.new
+    @has_subtitles = has_subtitles
+    @path_root = path_root
     log("In state: Start")
   end
 
@@ -141,11 +87,18 @@ class FileWriter
     output_footer
     @file.close if @file
     @file = open_file(title)
-    @file.write(yml_front(title))
-    @book = title
+    @file.write(yml_front(title, @path_root))
     @title = title
-    @state = States::MidTitle
-    log("In state: MidTitle")
+    if @has_subtitles
+      @state = States::MidTitle
+      log("In state: MidTitle")
+    else
+      output_title @title
+      output_header
+      output_media
+      @state = States::Content
+      log("In state: Content")
+    end
   end
 
   def process_content(content)
@@ -209,7 +162,8 @@ class FileWriter
   end
 
   def open_file(title)
-    filename = File.join('bible-highlights', slugify(title), 'index.html')
+    title = slugify(title)
+    filename = File.join('bible-highlights', @path_root, "#{title}.html")
     log("Opening file: #{filename}")
     File.open(filename, 'w')
   end
@@ -218,4 +172,4 @@ end
 
 data = pn.read
 gz = Zlib::GzipReader.new(StringIO.new(data))
-xml_to_html gz.read, FileWriter.new
+xml_to_html gz.read, FileWriter.new(false, "genesis")

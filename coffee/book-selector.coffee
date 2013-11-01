@@ -36,10 +36,21 @@ window.BookSelector = class BookSelector extends Backbone.View
     # Until that day, we'll add them as they're available.
     # options = ("<option>#{num}</option>" for num in [1..CHAPTER_COUNTS[@book()]])
     switch @book()
-      when 'Genesis' then options = ["<option>1</option>"]
-      when 'Exodus' then options = ["<option>20</option>"]
+      when 'Genesis'
+        options = [
+          ["genesis-organization", "organization"],
+          1,
+          ["chapter-01-days-of-creation", "1 - days of creation"],
+          2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
+        ]
+      when 'Exodus' then options = [20]
       else options = []
-    chapters = options.join('')
+    buildOption = (chapter) ->
+      if typeof chapter == 'number'
+        "<option value='chapter-#{sprintf '%02d', chapter}'>#{chapter}</option>"
+      else
+        "<option value='#{chapter[0]}'>#{chapter[1]}</option>"
+    chapters = _.map options, buildOption
     # Sometimes we'll want an arbitrary "first option"
     if @firstOption
       chapters = "

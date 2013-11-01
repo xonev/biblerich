@@ -77,19 +77,26 @@
     };
 
     BookSelector.prototype.updateChapters = function() {
-      var chapters, options;
+      var buildOption, chapters, options;
       this.$el.find('.chapters').empty();
       switch (this.book()) {
         case 'Genesis':
-          options = ["<option>1</option>"];
+          options = [["genesis-organization", "organization"], 1, ["chapter-01-days-of-creation", "1 - days of creation"], 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
           break;
         case 'Exodus':
-          options = ["<option>20</option>"];
+          options = [20];
           break;
         default:
           options = [];
       }
-      chapters = options.join('');
+      buildOption = function(chapter) {
+        if (typeof chapter === 'number') {
+          return "<option value='chapter-" + (sprintf('%02d', chapter)) + "'>" + chapter + "</option>";
+        } else {
+          return "<option value='" + chapter[0] + "'>" + chapter[1] + "</option>";
+        }
+      };
+      chapters = _.map(options, buildOption);
       if (this.firstOption) {
         chapters = "        <optgroup label='Book'><option value='0'>" + this.firstOption + "</option></optgroup>        <optgroup label='Chapters'>" + chapters + "</optgroup>";
       }
