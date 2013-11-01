@@ -10,11 +10,7 @@
     return selector.on('go', function(_arg) {
       var book, chapter, path;
       book = _arg.book, chapter = _arg.chapter;
-      if (chapter === '0') {
-        path = "" + book + " flashcards.html";
-      } else {
-        path = "/bible-highlights/review/" + book + "/chapter " + chapter + ".html";
-      }
+      path = "/bible-highlights/review/" + book + "/" + chapter + ".html";
       return window.location.pathname = selector.slugify(path);
     });
   });
