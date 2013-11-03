@@ -2,9 +2,15 @@
   <a href='{{page.image_path}}'>
     <img src='{{page.image_path}}' class='img-polaroid' alt='{{page.image_alt}}'></img>
   </a>
+  {% if page.audio_mp3_path or page.audio_wav_path %}
   <audio controls='true'>
     You must use a modern browser to listen to this recording.
+    {% if page.audio_mp3_path %}
     <source src='{{page.audio_mp3_path}}' type='audio/mp3'>
+    {% endif %}
+    {% if page.audio_wav_path %}
     <source src='{{page.audio_wav_path}}' type='audio/wav'>
+    {% endif %}
   </audio>
+  {% endif %}
 </div>
