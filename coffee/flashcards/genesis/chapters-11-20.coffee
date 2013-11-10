@@ -15,16 +15,16 @@ $ ->
                                             <h3><em>Smoking</em> furnace</h3>
                                             <h3>burning lamp covenant</h3>' }
     { img: 'genesis/chapter-16.png', text: '<h2>Hagar</h2>
-                                            <h2>Ishmael born<h2>' }
+                                            <h2>Ishmael born</h2>' }
     { img: 'genesis/chapter-17.png', text: '<h2>Names change</h2>
                                             <h4>father and mother of many nations</h4>
                                             <h3>and Circumcision Covenant</h3>' }
-    { img: 'genesis/chapter-18.png', text: '<h2>3 Strangers ate<h2>
+    { img: 'genesis/chapter-18.png', text: '<h2>3 Strangers ate</h2>
                                             <h4>Is anything too hard for the Lord?</h4>
                                             <h3>Not destroy by 10&apos;s</h3>' }
-    { img: 'genesis/chapter-19.png', text: '<h2>Sodom and Gomorrah<h2>
+    { img: 'genesis/chapter-19.png', text: '<h2>Sodom and Gomorrah</h2>
                                             <h3>men blinded, wife a pillar</h3>
                                             <h3>Lot&apos;s daughters - Moab and Benammi</h3>' }
-    { img: 'genesis/chapter-20.png', text: '<h2>Abraham says Sarah is Sister<h2>
+    { img: 'genesis/chapter-20.png', text: '<h2>Abraham says Sarah is Sister</h2>
                                             <h3>Abimelech took her</h3>' }
   ]
