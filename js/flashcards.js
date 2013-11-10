@@ -169,7 +169,7 @@
     CardView.prototype.initialize = function(_arg, imageFirst) {
       this.img = _arg.img, this.text = _arg.text;
       this.imageFirst = imageFirst != null ? imageFirst : false;
-      this.textElement = $("<p>" + this.text + "</p>");
+      this.textElement = $("<div>" + this.text + "</div>");
       this.imgElement = $("<img src='/img/flashcards/" + this.img + "' alt='click to see answer'></img>");
       this.showingImage = this.imageFirst;
       return this.$el.append(this.getNotShown(!this.showingImage));
