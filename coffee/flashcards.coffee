@@ -79,7 +79,7 @@ Flashcards.CardView = class CardView extends Backbone.View
     'click': 'toggle'
 
   initialize: ({@img, @text}, @imageFirst = false) ->
-    @textElement = $("<p>#{@text}</p>")
+    @textElement = $("<div>#{@text}</div>")
     @imgElement = $("<img src='/img/flashcards/#{@img}' alt='click to see answer'></img>")
     @showingImage = @imageFirst
     @$el.append @getNotShown(!@showingImage)
