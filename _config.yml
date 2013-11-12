@@ -6,3 +6,4 @@ url: http://localhost:4000
 source:      .
 destination: ./_site
 plugins:     ./_plugins
+exclude: ["vendor"]
