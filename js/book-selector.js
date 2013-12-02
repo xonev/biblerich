@@ -86,6 +86,9 @@
         case 'Exodus':
           options = [20];
           break;
+        case 'Daniel':
+          options = [["daniel-organization", "organization"], 1];
+          break;
         default:
           options = [];
       }
