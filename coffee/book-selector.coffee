@@ -25,7 +25,7 @@ window.BookSelector = class BookSelector extends Backbone.View
       chapter: @chapter()
 
   book: ->
-    @$el.find('.books option:selected').val()
+    @$el.find('.books option:selected').val().replace(/[^\w\s]+/, '')
 
   chapter: ->
     @$el.find('.chapters option:selected').val()
@@ -36,7 +36,7 @@ window.BookSelector = class BookSelector extends Backbone.View
     # Until that day, we'll add them as they're available.
     # options = ("<option>#{num}</option>" for num in [1..CHAPTER_COUNTS[@book()]])
     switch @book()
-      when 'Genesis*'
+      when 'Genesis'
         options = [
           ["genesis-organization", "organization"],
           1,
@@ -45,11 +45,12 @@ window.BookSelector = class BookSelector extends Backbone.View
           ["chapter-29-30-twelve-tribes", "29, 30 - twelve tribes"],
           31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
         ]
-      when 'Exodus*' then options = [20]
-      when 'Daniel*'
+      when 'Exodus' then options = [20]
+      when 'Daniel'
         options = [
           ["daniel-organization", "organization"],
-          1, 2
+          1, 2,
+          ["chapter-02-10-kingdoms", "2 - 10 kingdoms"]
         ]
       else options = []
     buildOption = (chapter) ->
