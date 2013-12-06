@@ -87,7 +87,7 @@
           options = [20];
           break;
         case 'Daniel':
-          options = [["daniel-organization", "organization"], 1, 2, ["chapter-02-10-kingdoms", "2 - 10 kingdoms"]];
+          options = [["daniel-organization", "organization"], 1, 2, ["chapter-02-10-kingdoms", "2 - 10 kingdoms"], 3];
           break;
         default:
           options = [];
