@@ -60,3 +60,7 @@ body {
 .book-selector .btn {
   margin-bottom: 10px;
 }
+
+.pull-right img.img-polaroid {
+  margin-left: 5px;
+}
