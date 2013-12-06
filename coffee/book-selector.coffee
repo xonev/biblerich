@@ -25,7 +25,7 @@ window.BookSelector = class BookSelector extends Backbone.View
       chapter: @chapter()
 
   book: ->
-    @$el.find('.books option:selected').val()
+    @$el.find('.books option:selected').val().replace(/[^\w\s]+/, '')
 
   chapter: ->
     @$el.find('.chapters option:selected').val()
@@ -49,7 +49,9 @@ window.BookSelector = class BookSelector extends Backbone.View
       when 'Daniel'
         options = [
           ["daniel-organization", "organization"],
-          1
+          1, 2,
+          ["chapter-02-10-kingdoms", "2 - 10 kingdoms"],
+          3
         ]
       else options = []
     buildOption = (chapter) ->

@@ -69,7 +69,7 @@
     };
 
     BookSelector.prototype.book = function() {
-      return this.$el.find('.books option:selected').val();
+      return this.$el.find('.books option:selected').val().replace(/[^\w\s]+/, '');
     };
 
     BookSelector.prototype.chapter = function() {
@@ -87,7 +87,7 @@
           options = [20];
           break;
         case 'Daniel':
-          options = [["daniel-organization", "organization"], 1];
+          options = [["daniel-organization", "organization"], 1, 2, ["chapter-02-10-kingdoms", "2 - 10 kingdoms"], 3];
           break;
         default:
           options = [];

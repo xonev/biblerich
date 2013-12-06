@@ -6,55 +6,55 @@
     }, [
       {
         img: 'books/isaiah.png',
-        text: 'Isaiah'
+        text: '<h2>Isaiah - 66</h2>'
       }, {
         img: 'books/jeremiah.png',
-        text: 'Jeremiah'
+        text: '<h2>Jeremiah - 52</h2>'
       }, {
         img: 'books/lamentations.png',
-        text: 'Lamentations'
+        text: '<h2>Lamentations - 5</h2>'
       }, {
         img: 'books/ezekiel.png',
-        text: 'Ezekiel'
+        text: '<h2>Ezekiel - 48</h2>'
       }, {
         img: 'books/daniel.png',
-        text: 'Daniel'
+        text: '<h2>Daniel - 12</h2>'
       }, {
         img: 'books/hosea.png',
-        text: 'Hosea'
+        text: '<h2>Hosea - 14</h2>'
       }, {
         img: 'books/joel.png',
-        text: 'Joel'
+        text: '<h2>Joel - 3</h2>'
       }, {
         img: 'books/amos.png',
-        text: 'Amos'
+        text: '<h2>Amos - 9</h2>'
       }, {
         img: 'books/obadiah.png',
-        text: 'Obadiah'
+        text: '<h2>Obadiah - 1</h2>'
       }, {
         img: 'books/jonah.png',
-        text: 'Jonah'
+        text: '<h2>Jonah - 4</h2>'
       }, {
         img: 'books/micah.png',
-        text: 'Micah'
+        text: '<h2>Micah - 7</h2>'
       }, {
         img: 'books/nahum.png',
-        text: 'Nahum'
+        text: '<h2>Nahum - 3</h2>'
       }, {
         img: 'books/habakkuk.png',
-        text: 'Habakkuk'
+        text: '<h2>Habakkuk - 3</h2>'
       }, {
         img: 'books/zephaniah.png',
-        text: 'Zephaniah'
+        text: '<h2>Zephaniah - 3</h2>'
       }, {
         img: 'books/haggai.png',
-        text: 'Haggai'
+        text: '<h2>Haggai - 2</h2>'
       }, {
         img: 'books/zechariah.png',
-        text: 'Zechariah'
+        text: '<h2>Zechariah - 14</h2>'
       }, {
         img: 'books/malachi.png',
-        text: 'Malachi'
+        text: '<h2>Malachi - 4</h2>'
       }
     ]);
   });
