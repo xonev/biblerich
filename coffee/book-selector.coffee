@@ -51,7 +51,7 @@ window.BookSelector = class BookSelector extends Backbone.View
           ["daniel-organization", "organization"],
           1, 2,
           ["chapter-02-10-kingdoms", "2 - 10 kingdoms"],
-          3
+          3, 4, 5
         ]
       else options = []
     buildOption = (chapter) ->
