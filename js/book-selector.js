@@ -81,13 +81,13 @@
       this.$el.find('.chapters').empty();
       switch (this.book()) {
         case 'Genesis':
-          options = [["genesis-organization", "organization"], 1, ["chapter-01-days-of-creation", "1 - days of creation"], 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, ["chapter-29-30-twelve-tribes", "29, 30 - twelve tribes"], 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
+          options = [["genesis-organization", "Organization"], 1, ["chapter-01-days-of-creation", "1 - Days of Creation"], 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, ["chapter-29-30-twelve-tribes", "29, 30 - Twelve Tribes"], 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
           break;
         case 'Exodus':
           options = [20];
           break;
         case 'Daniel':
-          options = [["daniel-organization", "organization"], 1, 2, ["chapter-02-10-kingdoms", "2 - 10 kingdoms"], 3, 4, 5];
+          options = [["daniel-organization", "Organization"], 1, 2, ["chapter-02-10-kingdoms", "2 - 10 kingdoms"], 3, 4, 5, 6, 7, 8, ["greek-generals", "Greek Generals"], 9, 10, 11, 12];
           break;
         default:
           options = [];
