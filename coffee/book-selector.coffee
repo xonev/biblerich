@@ -2,6 +2,7 @@ window.BookSelector = class BookSelector extends Backbone.View
   events:
     'click button': 'go'
     'change .books': 'updateChapters'
+    'keyup .chapters': 'onKeyup'
 
   initialize: ({@firstOption, @oldTestament, @newTestament}) ->
     @updateChapters()
@@ -23,6 +24,10 @@ window.BookSelector = class BookSelector extends Backbone.View
     @trigger 'go',
       book: @book()
       chapter: @chapter()
+
+  onKeyup: (event) ->
+    return unless event.keyCode == 13
+    @go()
 
   book: ->
     @$el.find('.books option:selected').val().replace(/[^\w\s]+/, '')
