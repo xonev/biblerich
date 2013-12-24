@@ -42,7 +42,7 @@ $ ->
     { img: 'daniel/chapter-12.png', text: '<h2>Michael Stands Up</h2>
                                            <h4>time of trouble</h4>
                                            <h2>(1,2,3,4 going up)</h2>
-                                           <h4>4 ups - Stand up, Sleep awake, Shut up, (many run to and fro) Shall increase)</h4>
+                                           <h4>4 ups - Stand up, Sleep awake, Shut up, (many run to and fro) Shall increase</h4>
                                            <h4>3 time prophecies - 1/2 (1260), 1290, 1335 days</h4>' }
   ]
 
