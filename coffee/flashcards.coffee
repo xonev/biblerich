@@ -78,32 +78,48 @@ Flashcards.CardView = class CardView extends Backbone.View
   events:
     'click': 'toggle'
 
-  initialize: ({@img, @text}, @imageFirst = false) ->
-    @textElement = $("<div>#{@text}</div>")
-    @imgElement = $("<img src='/img/flashcards/#{@img}' alt='click to see answer'></img>")
-    @showingImage = @imageFirst
-    @$el.append @getNotShown(!@showingImage)
+  initialize: (data, @frontFirst = false) ->
+    @back = @buildBack(data)
+    @front = @buildFront(data)
+    @showingFront = @frontFirst
+    @$el.append @getNotShown(!@showingFront)
 
-  getNotShown: (showingImage) ->
-    if showingImage
-      @textElement
+  buildBack: (data) ->
+    if data.text
+      $("<div>#{data.text}</div>")
+    else if data.front
+      $("<div>#{data.front}</div>")
     else
-      @imgElement
+      throw new Error 'No data for the front of the card.'
 
-  getDirection: (showingImage) ->
-    if showingImage
+  buildFront: (data) ->
+    if data.img
+      $("<img src='/img/flashcards/#{data.img}' alt='click to see other side'></img>")
+    else if data.back
+      $("<div>#{data.back}</div>")
+    else
+      throw new Error 'No data for the back of the card.'
+
+  getNotShown: (showingFront) ->
+    if showingFront
+      @back
+    else
+      @front
+
+  getDirection: (showingFront) ->
+    if showingFront
       'rl'
     else
       'lr'
 
   toggle: =>
     @$el.flip
-      direction: @getDirection(@showingImage)
+      direction: @getDirection(@showingFront)
       speed: 200
-      content: @getNotShown(@showingImage)[0] # flip acts funny when passed a jQuery element list
+      content: @getNotShown(@showingFront)[0] # flip acts funny when passed a jQuery element list
       color: 'white'
 
-    @showingImage = !@showingImage
+    @showingFront = !@showingFront
 
   render: ->
     @el

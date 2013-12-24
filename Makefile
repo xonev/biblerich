@@ -1,4 +1,4 @@
-COFFEEC = coffee
+COFFEEC = coffee --js
 
 APPSRC := $(wildcard coffee/*.coffee) $(wildcard coffee/*/*/*.coffee) $(wildcard coffee/*/*.coffee)
 APPOBJ := ${APPSRC:coffee/%.coffee=js/%.js}
@@ -8,5 +8,5 @@ build: ${APPOBJ}
 
 js/%.js: coffee/%.coffee
 	mkdir -p $(dir $@)
-	${COFFEEC} -cp $< > $@
+	${COFFEEC} < $< > $@
 
