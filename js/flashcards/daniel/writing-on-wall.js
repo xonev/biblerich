@@ -10,7 +10,7 @@ $(function () {
       back: '<h3>Weighed and Wanting</h3>'
     },
     {
-      front: '<img src="/img/flashcards/daniel/writing-on-wall.png" alt="click to see other side"></img>\n              <h3>UPHARSIN</h3>',
+      front: '<img src="/img/flashcards/daniel/writing-on-wall.png" alt="click to see other side"></img>\n              <h3>UPHARSIN</h3>\n              <h4>(PERES)</h4>',
       back: '<h3>Divided and Given to the Medes and Persians</h3>'
     }
   ]);
