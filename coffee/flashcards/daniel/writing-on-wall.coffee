@@ -12,7 +12,8 @@ $ ->
     }
     {
       front: '<img src="/img/flashcards/daniel/writing-on-wall.png" alt="click to see other side"></img>
-              <h3>UPHARSIN</h3>'
+              <h3>UPHARSIN</h3>
+              <h4>(PERES)</h4>'
       back: '<h3>Divided and Given to the Medes and Persians</h3>'
     }
   ]
