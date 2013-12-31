@@ -74,7 +74,7 @@ $ ->
                <li>Pope influences divided kingdoms</li>
                <li>Arrogant, claims to be God on earth</li>
                <li>Persecutes saints</li>
-               <li>Chagnes God&apos;s time law of 7th day</li>
+               <li>Changes God&apos;s time law of 7th day</li>
                <li>Persecutes for 3 1/2 years = 1260 days</li>
              </ol>'
     }
