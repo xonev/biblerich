@@ -1,8 +1,9 @@
 node_modules
 _site/
+_deploy
+_orig_docs
 orig_docs
 connect_ec2.sh
 deploy.sh
-_orig_docs
 img
-_deploy
+audio
