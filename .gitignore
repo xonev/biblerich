@@ -7,3 +7,4 @@ connect_ec2.sh
 deploy.sh
 img
 audio
+docs

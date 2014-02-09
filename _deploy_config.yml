@@ -6,4 +6,4 @@ url: http://localhost:4000
 source:      .
 destination: ./_deploy
 plugins:     ./_plugins
-exclude: ["coffee", "scripts", "Gemfile", "Gemfile.lock", "Makefile", "README.md", "img", "audio"]
+exclude: ["coffee", "scripts", "Gemfile", "Gemfile.lock", "Makefile", "README.md", "img", "audio", "docs"]
