@@ -8,6 +8,15 @@ h1, h2, h3, h4, h5 {
   font-family: "Noto Sans", sans-serif;
 }
 
+.brand img {
+  width: 120px;
+  margin-top: 10px;
+}
+
+.contact.lead {
+  margin-top: 20px;
+}
+
 #flashcards h1,
 #flashcards h2,
 #flashcards h3,
@@ -65,10 +74,6 @@ body {
   background-position: top left;
   background-repeat: repeat;
   background-attachment: fixed;
-}
-
-.brand img {
-  height: 40px;
 }
 
 .logo-nav > li {
