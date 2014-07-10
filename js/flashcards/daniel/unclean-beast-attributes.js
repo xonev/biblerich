@@ -19,7 +19,7 @@ $(function () {
     },
     {
       front: '<img src="/img/flashcards/daniel/unclean-horns.png" alt="click to see other side"></img>\n              <ol>\n                <li>Diverse</li>\n                <li>Speaks great things</li>\n                <li>Wears out saints</li>\n                <li>Changes times and laws</li>\n                <li>Given into his hand until a time, times, and the dividing of time</li>\n              </ol>',
-      back: '<h3>Rome Divided</h3>\n             <ol>\n               <li>Pope influences divided kingdoms</li>\n               <li>Arrogant, claims to be God on earth</li>\n               <li>Persecutes saints</li>\n               <li>Chagnes God&apos;s time law of 7th day</li>\n               <li>Persecutes for 3 1/2 years = 1260 days</li>\n             </ol>'
+      back: '<h3>Rome Divided</h3>\n             <ol>\n               <li>Pope influences divided kingdoms</li>\n               <li>Arrogant, claims to be God on earth</li>\n               <li>Persecutes saints</li>\n               <li>Changes God&apos;s time law of 7th day</li>\n               <li>Persecutes for 3 1/2 years = 1260 days</li>\n             </ol>'
     }
   ]);
 });
