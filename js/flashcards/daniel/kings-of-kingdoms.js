@@ -19,7 +19,7 @@ $(function () {
     },
     {
       front: '<h3>Pope influences Kingdoms</h3>',
-      back: '<img src="/img/flashcards/daniel/kings-greece.png" alt="Greek Kings"></img>\n             <h3>Kings Divided</h3>\n             <h3>476 A.D.</h3>'
+      back: '<img src="/img/flashcards/daniel/kings-divided.png" alt="Rome Divided"></img>\n             <h3>Rome Divided</h3>\n             <h3>476 A.D.</h3>'
     }
   ]);
 });
