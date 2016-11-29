@@ -30,7 +30,8 @@ $ ->
     }
     {
       front: '<h3>Caesars</h3>'
-      back: '<h3>Roman Kings</h3>
+      back: '<img src="/img/flashcards/daniel/roman-kings.png" alt="Roman Kings"></img>
+             <h3>Roman Kings</h3>
              <h3>168 B.C.</h3>'
     }
     {
