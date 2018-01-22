@@ -5,5 +5,5 @@ url: http://localhost:4000
 
 source:      .
 destination: ./_site
-plugins:     ./_plugins
+plugins_dir: ./_plugins
 exclude: ["coffee", "scripts", "Gemfile", "Gemfile.lock", "Makefile", "README.md"]

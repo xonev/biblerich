@@ -6,7 +6,7 @@ $ ->
                                             <h4>God will provide, Jehovah-jireh</h4>
                                             <h4>seed as stars and sand of sea promise</h4>' }
     { img: 'genesis/chapter-23.png', text: '<h2>Sarah dies</h2>
-                                            <h3>(126 yrs.), buried in a</h3>
+                                            <h3>(127 yrs.), buried in a</h3>
                                             <h2>Cave in Canaan</h2>
                                             <h3>for 400 shekels of silver</h3>' }
     { img: 'genesis/chapter-24.png', text: '<h2>Isaac marries Rebekah</h2>' }
